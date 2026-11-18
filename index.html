@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170d35">
+<title>Happy Birthday · Yxx</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Microsoft YaHei", sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 50% 45%, #453078 0%, transparent 55%),
+        linear-gradient(160deg, #09091f, #21103e, #100b2c);
+}
+
+#stars, #confetti {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#stars { z-index: 0; }
+#confetti { z-index: 5; }
+
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.tag {
+    color: #d7baff;
+    letter-spacing: 5px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    animation: fadeIn 2s both;
+}
+
+h1 {
+    font-size: clamp(30px, 8vw, 54px);
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #fff0d0, #ff9ed5, #c6a5ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px #c68aff55;
+}
+
+.subtitle {
+    margin-top: 12px;
+    color: #d9c9ff;
+    font-size: 17px;
+    letter-spacing: 4px;
+}
+
+.cake-area {
+    position: relative;
+    width: 300px;
+    height: 310px;
+    margin-top: 28px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.glow {
+    position: absolute;
+    width: 260px;
+    height: 100px;
+    left: 20px;
+    bottom: 10px;
+    background: #c17bff;
+    filter: blur(55px);
+    opacity: .35;
+}
+
+.plate {
+    position: absolute;
+    width: 290px;
+    height: 24px;
+    bottom: 22px;
+    left: 5px;
+    border-radius: 50%;
+    background: linear-gradient(#fff4ff, #a98bc9);
+    box-shadow: 0 8px 20px #0008;
+}
+
+.bottom-cake {
+    position: absolute;
+    width: 250px;
+    height: 90px;
+    left: 25px;
+    bottom: 43px;
+    border-radius: 18px 18px 28px 28px;
+    background: linear-gradient(90deg, #e96baf, #ffb5dc, #d95caa);
+    box-shadow: inset 0 -12px 0 #bd478e;
+}
+
+.middle-cake {
+    position: absolute;
+    width: 205px;
+    height: 75px;
+    left: 47px;
+    bottom: 126px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #9170eb, #d0aaff, #8260db);
+    box-shadow: inset 0 -10px 0 #7050c0;
+}
+
+.top-cake {
+    position: absolute;
+    width: 155px;
+    height: 65px;
+    left: 72px;
+    bottom: 195px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #67b9ff, #c5eaff, #72c8ff);
+    box-shadow: inset 0 -9px 0 #579fe0;
+}
+
+.cream {
+    position: absolute;
+    width: 100%;
+    height: 24px;
+    top: -9px;
+    border-radius: 50%;
+    background: #fff0f9;
+    box-shadow: 0 3px 7px #fff8;
+}
+
+.cherry {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #ff547c;
+    top: -15px;
+    box-shadow: inset -3px -3px 4px #a21d53;
+}
+
+.candle {
+    position: absolute;
+    width: 10px;
+    height: 49px;
+    bottom: 250px;
+    background: repeating-linear-gradient(
+        135deg, #fff2a8 0 7px, #ff8ab8 7px 12px
+    );
+    border-radius: 5px;
+}
+
+.c1 { left: 112px; }
+.c2 { left: 145px; }
+.c3 { left: 178px; }
+
+.flame {
+    position: absolute;
+    width: 15px;
+    height: 23px;
+    top: -24px;
+    left: -2px;
+    background: radial-gradient(ellipse at 50% 70%, #fffbd0, #ffcf50 55%, #ff783b);
+    border-radius: 50% 50% 40% 40%;
+    filter: drop-shadow(0 0 9px #ffbd51);
+    animation: flicker .5s infinite alternate;
+}
+
+@keyframes flicker {
+    from { transform: scale(.9) rotate(-5deg); }
+    to { transform: scale(1.12) rotate(5deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.message {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #e7d7ff;
+    letter-spacing: 2px;
+    line-height: 2;
+}
+
+button {
+    margin-top: 24px;
+    padding: 14px 34px;
+    border: 1px solid #ffffff88;
+    border-radius: 50px;
+    background: linear-gradient(100deg, #a76bdb, #e77ebd);
+    color: white;
+    font-size: 16px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 25px #d18bff66;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:active {
+    transform: scale(.94);
+}
+
+#surprise {
+    display: none;
+    margin-top: 20px;
+    color: #ffe2ad;
+    font-size: 18px;
+    line-height: 1.9;
+    animation: fadeIn 1.5s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.balloon {
+    position: fixed;
+    bottom: -130px;
+    width: 48px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: .7;
+    z-index: 1;
+    animation: rise linear infinite;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    left: 23px;
+    top: 59px;
+    width: 1px;
+    height: 75px;
+    background: #ffffff66;
+}
+
+@keyframes rise {
+    to { transform: translateY(-120vh) rotate(15deg); }
+}
+
+@media (max-height: 700px) {
+    .container { transform: scale(.85); }
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<canvas id="confetti"></canvas>
+
+<div class="container">
+    <div class="tag">A SPECIAL DAY FOR YOU</div>
+
+    <h1>HAPPY BIRTHDAY</h1>
+    <div class="subtitle">✦ Dear Yxx ✦</div>
+
+    <div class="cake-area">
+        <div class="glow"></div>
+
+        <div class="plate"></div>
+
+        <div class="bottom-cake">
+            <div class="cream"></div>
+            <div class="cherry" style="left:25px"></div>
+            <div class="cherry" style="left:85px"></div>
+            <div class="cherry" style="left:145px"></div>
+            <div class="cherry" style="left:205px"></div>
+        </div>
+
+        <div class="middle-cake">
+            <div class="cream"></div>
+        </div>
+
+        <div class="top-cake">
+            <div class="cream"></div>
+        </div>
+
+        <div class="candle c1"><div class="flame"></div></div>
+        <div class="candle c2"><div class="flame"></div></div>
+        <div class="candle c3"><div class="flame"></div></div>
+    </div>
+
+    <div class="message">
+        愿所有美好都如期而至<br>
+        愿每一天都有惊喜和快乐
+    </div>
+
+    <button id="wishButton">点击开启生日惊喜 ✨</button>
+
+    <div id="surprise">
+        🎉 生日快乐，Yxx！🎉<br>
+        愿你所遇皆温柔，所行皆坦途。<br>
+        新的一岁，继续闪闪发光！
+    </div>
+</div>
+
+<script>
+// 星空
+const starCanvas = document.getElementById("stars");
+const starCtx = starCanvas.getContext("2d");
+
+let stars = [];
+
+function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    for (const canvas of [starCanvas, document.getElementById("confetti")]) {
+        canvas.width = innerWidth * dpr;
+        canvas.height = innerHeight * dpr;
+        canvas.style.width = innerWidth + "px";
+        canvas.style.height = innerHeight + "px";
+        canvas.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    stars = Array.from({length: 100}, () => ({
+        x: Math.random() * innerWidth,
+        y: Math.random() * innerHeight,
+        r: Math.random() * 1.8 + .3,
+        a: Math.random()
+    }));
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+function drawStars() {
+    starCtx.clearRect(0, 0, innerWidth, innerHeight);
+
+    stars.forEach(s => {
+        s.a += (Math.random() - .5) * .06;
+        s.a = Math.max(.2, Math.min(1, s.a));
+
+        starCtx.beginPath();
+        starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        starCtx.fillStyle = `rgba(255,255,255,${s.a})`;
+        starCtx.fill();
+    });
+
+    requestAnimationFrame(drawStars);
+}
+
+drawStars();
+
+// 气球
+const balloonColors = ["#ff78ad", "#8edbff", "#c49aff", "#ffdc83"];
+
+balloonColors.forEach((color, i) => {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = (8 + i * 25) + "%";
+    b.style.background = color;
+    b.style.animationDuration = (13 + i * 3) + "s";
+    b.style.animationDelay = (-i * 4) + "s";
+    document.body.appendChild(b);
+});
+
+// 彩纸
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+let pieces = [];
+
+function burst() {
+    for (let i = 0; i < 150; i++) {
+        pieces.push({
+            x: innerWidth / 2,
+            y: innerHeight / 2,
+            vx: (Math.random() - .5) * 12,
+            vy: (Math.random() - .8) * 12,
+            size: Math.random() * 7 + 3,
+            color: ["#ff9acb", "#ffe08b", "#9ceaff", "#c4a0ff"][
+                Math.floor(Math.random() * 4)
+            ],
+            life: 100
+        });
+    }
+}
+
+function drawConfetti() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+    pieces = pieces.filter(p => p.life > 0);
+
+    pieces.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += .12;
+        p.life--;
+
+        ctx.globalAlpha = p.life / 100;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size * 1.5);
+    });
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawConfetti);
+}
+
+drawConfetti();
+
+// 生日惊喜
+document.getElementById("wishButton").addEventListener("click", () => {
+    document.getElementById("surprise").style.display = "block";
+    document.getElementById("wishButton").textContent = "生日快乐！💖";
+    burst();
+});
+</script>
+
+</body>
+</html>
